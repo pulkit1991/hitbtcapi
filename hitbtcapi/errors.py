@@ -42,7 +42,7 @@ class GatewayTimeoutError(APIError): pass
 
 def api_response_error(response):
     """
-    Helper method for creating errors and attaching HTTP response/request details to them.
+    Helper method for creating errors and attaching HTTP response details to them.
     """
     error_msg = str(response.reason) or ''
     error_desc = ''

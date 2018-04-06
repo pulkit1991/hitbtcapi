@@ -20,4 +20,7 @@ def check_uri_security(uri):
 
 
 def method_name():
+    """
+    Returns the current active function name as a string
+    """
     return inspect.stack()[1][3]

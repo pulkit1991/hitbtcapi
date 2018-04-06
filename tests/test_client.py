@@ -12,7 +12,7 @@ import warnings
 import httpretty as hp
 
 from hitbtcapi import errors
-from hitbtcapi.client import Client, handle_response
+from hitbtcapi.client import Client
 
 # Hide all warning output.
 warnings.showwarning = lambda *a, **k: None
@@ -69,8 +69,9 @@ class TestClient(unittest2.TestCase):
 
     @hp.activate
     def test_base_api_uri_used_instead_of_default(self):
+        # Requests to the default BASE_API_URI will noticeably fail by raising an AssertionError. Requests to the new URL will respond HTTP 200.
         new_base_api_uri = 'https://api.hitbtc.com/api/new/'
-
+        # If any error is raised by the server, the test suite will never exit when using Python 3. This strange technique is used to raise the errors outside of the mocked server environment.
         errors_in_server = []
         def mock_response(request,uri,headers):
             try:
@@ -93,7 +94,7 @@ class TestClient(unittest2.TestCase):
 
     @hp.activate
     def test_http_base_api_uri_issues_uri_security_warning(self):
-        insecure_url = 'http://api.hitbtc.com/api/2/'
+        insecure_url = 'http://api.hitbtc.com/api/1/'
         with self.assertWarns(UserWarning):
             client = Client(api_key,api_secret,insecure_url)
             # check if response is OK even with insecure_url
@@ -111,7 +112,7 @@ class TestClient(unittest2.TestCase):
                          'status':200}
         hp.register_uri(hp.GET,re.compile('.*test$'),**mock_response)
         response = client._get('test')
-        self.assertEqual(handle_response(response),mock_items)
+        self.assertEqual(client._handle_response(response),mock_items)
 
     @hp.activate
     def test_error_response_handling(self):
@@ -126,7 +127,7 @@ class TestClient(unittest2.TestCase):
                              'status':ecode}
             hp.register_uri(hp.GET,re.compile('.*'+str(ecode)+'$'),**mock_response)
             with self.assertRaises(eclass):
-                e = handle_response(client._get(str(ecode)))
+                e = client._handle_response(client._get(str(ecode)))
                 self.assertEqual(e.error_msg,'fake error message')
                 self.assertEqual(e.error_desc,'fake error description')
 
@@ -136,13 +137,13 @@ class TestClient(unittest2.TestCase):
                              'content_type':'text/plain'}
             hp.register_uri(hp.GET,re.compile('.*'+str(ecode)+'$'),**mock_response)
             with self.assertRaises(eclass):
-                handle_response(client._get(str(ecode)))
+                client._handle_response(client._get(str(ecode)))
 
         # check if status code is unrecognized, generic APIError is raised
         mock_response = {'status':418}
         hp.register_uri(hp.GET,re.compile('.*test$'),**mock_response)
         with self.assertRaises(errors.APIError):
-            handle_response(client._get('test'))
+            client._handle_response(client._get('test'))
 
     @hp.activate
     def test_request_helper_automatically_encodes_data(self):
