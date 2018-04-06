@@ -41,7 +41,7 @@ Installation
 API Reference
 ===============
 
-The official documentation can be found on the `HitBTC API reference <https://api.hitbtc.com/`_. You can also `explore the API <https://api.hitbtc.com/api/2/explore/>`_ using Swagger UI.
+The official documentation can be found on the `HitBTC API reference page <https://api.hitbtc.com/>`_. You can also `explore the API <https://api.hitbtc.com/api/2/explore/>`_ using Swagger UI.
 
 
 Prerequisites
