@@ -41,7 +41,7 @@ Installation
 API Reference
 ===============
 
-The official documentation can be found `here <https://github.com/hitbtc-com/hitbtc-api>`_. You can also `explore the API <https://api.hitbtc.com/api/2/explore/>`_ using Swagger UI.
+The official documentation can be found on the `HitBTC API reference <https://api.hitbtc.com/`_. You can also `explore the API <https://api.hitbtc.com/api/2/explore/>`_ using Swagger UI.
 
 
 Prerequisites
@@ -69,7 +69,7 @@ Create a ``Client`` object for interacting with the API:
 
 Error handling
 --------------
-All errors occurring during interaction with the API will be raised as exceptions. These exceptions will be subclasses of ``hitbtcapi.errors.HitBTCError``. When the error involves an API request and/or response, the error will be a subclass of ``hitbtcapi.errors.APIError``, and include more information about the failed interaction. For full details of error responses, please refer to the `relevant API documentation <https://github.com/hitbtc-com/hitbtc-api#error-response>`_.
+All errors occurring during interaction with the API will be raised as exceptions. These exceptions will be subclasses of ``hitbtcapi.errors.HitBTCError``. When the error involves an API request and/or response, the error will be a subclass of ``hitbtcapi.errors.APIError``, and include more information about the failed interaction. For full details of error responses, please refer to the `relevant API documentation <https://api.hitbtc.com/#error-response>`_.
 
 +-------------------------+----------------------+
 |          Error          |    HTTP Status code  |
@@ -97,7 +97,7 @@ All errors occurring during interaction with the API will be raised as exception
 
 Usage
 -------
-I've done my best to make the code clean, commented, and understandable; however it may not be exhaustive. For more details, please refer to the `official documentation <https://github.com/hitbtc-com/hitbtc-api>`_ or the `API Explorer <https://api.hitbtc.com/api/2/explore/>`_.
+I've done my best to make the code clean, commented, and understandable; however it may not be exhaustive. For more details, please refer to the `official documentation <https://api.hitbtc.com/>`_ or the `API Explorer <https://api.hitbtc.com/api/2/explore/>`_.
 
 **IN SHORT**
 
