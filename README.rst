@@ -1,4 +1,4 @@
-hitbtcapi 1.0
+hitbtcapi
 ===================
 
 REST API Client for HitBTC
@@ -16,17 +16,8 @@ Features
     - Automatic packing into JSON
 
 - Near 100% test coverage.
-- Tab-completable methods and attributes when using IPython.
+- Tab-completable methods and attributes when using `IPython <http://ipython.org/>`_.
 
-Dependencies
-===============
-
-Install the required dependencies with
-
-.. code:: bash
-
-    $ pip install -r requirements.txt # for api
-    $ pip install -r requirements_test.txt # for tests
 
 Installation
 =============
@@ -37,6 +28,13 @@ Installation
 
     $ pip install hitbtcapi
 
+or with ``easy_install``:
+
+.. code:: bash
+
+    $ easy_install hitbtcapi
+
+The library is currently tested against Python versions 2.7 and 3.4+.
 
 API Reference
 ===============
@@ -97,14 +95,13 @@ All errors occurring during interaction with the API will be raised as exception
 
 Usage
 -------
-I've done my best to make the code clean, commented, and understandable; however it may not be exhaustive. For more details, please refer to the `official documentation <https://api.hitbtc.com/>`_ or the `API Explorer <https://api.hitbtc.com/api/2/explore/>`_.
+I've done my best to make the code clean, commented, and understandable; however it may not be exhaustive. For more details, please refer to the `HitBTC API official documentation <https://api.hitbtc.com/>`_ or the `API Explorer <https://api.hitbtc.com/api/2/explore/>`_.
 
 **IN SHORT**
 
-- Use args for *URI paths*
-- Use kwargs for *form data* or *query parameters*
+- **Use args for URI paths**
+- **Use kwargs for formData or query parameters**
 
-Thats it!
 
 **Public API (Market Data)**
 
@@ -335,13 +332,72 @@ Get all transactions or by id
     client.get_account_transaction('d2ce578f-647d-4fa0-b1aa-4a27e5ee597b')
 
 
-Running tests
-===============
+Testing / Contributing
+=======================
+Any contribution is welcome! The process is simple:
+
+* Fork this repo
+* Make your changes
+* Run the tests (for multiple versions: preferred)
+* Submit a pull request.
+
+
+Testing for your current python version
+------------------------------------------
+
+Tests are run via `nosetest <https://nose.readthedocs.io/en/latest/>`_. To run the tests, clone the repository and then:
 
 .. code:: bash
 
-    $ python -m unittest2 tests/test_client.py
-    $ python -m unittest2 tests/test_utils.py
+    # Install the required dependencies
+    $ pip install -r requirements.txt
+    $ pip install -r test-requirements.txt
+
+    # Run the tests
+    $ nosetests
+
+
+Testing for multiple python versions
+------------------------------------------
+
+I am using `tox <http://tox.readthedocs.io/en/latest/install.html>`_ to run the test suite against multiple versions of Python. Tox requires the appropriate Python interpreters to run the tests in different environments. I would recommend using `pyenv <https://github.com/pyenv/pyenv#installation>`_ for this.
+
+
+However, the process is a little unintuitive because `tox` does not seem to work with multiple versions of python (installed via `pyenv`) when inside a `pyenv` virtual environment.
+
+
+So, first deactivate your pyenv virtual environment:
+
+.. code:: bash
+
+    $ (hitbtcapi-venv) pyenv deactivate
+
+
+and then install `tox` with pip or easy_install:
+
+.. code:: bash
+
+    $ pip install tox # or
+    $ easy_install tox
+
+
+Install python versions which you want to test:
+
+.. code:: bash
+
+    $ pyenv install 2.7.14
+    $ pyenv install 3.5.0
+    $ pyenv install 3.6.0
+
+and so forth. Now, in your project directory:
+
+.. code:: bash
+
+    # all versions which are in tox.ini file
+    $ pyenv local 2.7.14 3.5.0 3.6.0
+
+    # run the tests for all the above versions
+    $ tox
 
 
 License
