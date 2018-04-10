@@ -1,2 +1,0 @@
-httpretty==0.8.3
-unittest2==0.8.0
