@@ -354,7 +354,14 @@ Tests are run via `nosetest <https://nose.readthedocs.io/en/latest/>`_. To run t
     $ pip install -r test-requirements.txt
 
     # Run the tests
-    $ nosetests
+    $ make tests
+
+
+If you'd also like to generate an HTML coverage report (useful for figuring out which lines of code are actually being tested), make sure the requirements are installed and then run:
+
+.. code:: bash
+
+    $ make coverage
 
 
 Testing for multiple python versions
@@ -363,10 +370,7 @@ Testing for multiple python versions
 I am using `tox <http://tox.readthedocs.io/en/latest/install.html>`_ to run the test suite against multiple versions of Python. Tox requires the appropriate Python interpreters to run the tests in different environments. I would recommend using `pyenv <https://github.com/pyenv/pyenv#installation>`_ for this.
 
 
-However, the process is a little unintuitive because `tox` does not seem to work with multiple versions of python (installed via `pyenv`) when inside a `pyenv` virtual environment.
-
-
-So, first deactivate your pyenv virtual environment:
+However, the process is a little unintuitive because ``tox`` does not seem to work with multiple versions of python (installed via ``pyenv``) when inside a ``pyenv`` virtual environment. So, first deactivate your pyenv virtual environment:
 
 .. code:: bash
 
