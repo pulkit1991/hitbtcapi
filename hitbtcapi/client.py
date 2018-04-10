@@ -25,7 +25,7 @@ class Client(object):
     Full API docs, including descriptions of each API and its parameters, are available here: https://api.hitbtc.com/
     """
 
-    BASE_API_URI = 'https://api.hitbtc.com/api/2/' # latest is v2
+    BASE_API_URI = 'https://api.hitbtc.com/api/2/' #v2
 
     def __init__(self,key,secret,base_api_uri=None):
         if not key:
