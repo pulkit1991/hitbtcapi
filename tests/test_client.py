@@ -127,10 +127,8 @@ class TestClient(unittest2.TestCase):
                              'status':ecode}
             hp.register_uri(hp.GET,re.compile('.*'+str(ecode)+'$'),**mock_response)
             with self.assertRaises(eclass):
-                e = client._handle_response(client._get(str(ecode)))
-                self.assertEqual(e.error_msg,'fake error message')
-                self.assertEqual(e.error_desc,'fake error description')
-
+                client._handle_response(client._get(str(ecode)))
+                
         # check if appropriate error raised even with no error message in body or if content-type is not text/json
         for ecode,eclass in six.iteritems(errors._status_code_to_class):
             mock_response = {'status':ecode,
